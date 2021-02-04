@@ -1,0 +1,168 @@
+.body
+{
+    background-color: #666;
+    z-index: 1;
+}
+
+.bodyTable
+{
+    /*border: 1px solid rgb(255, 0, 0);*/
+    display: table;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.sidebarCell
+{
+    display: table-cell;
+    transition: column-width 0.3s ease-out;
+    empty-cells: hide;
+    vertical-align: top;
+    height: 100%;
+    border: 1px solid blueviolet;
+}
+
+.sidebarOpened
+{
+    column-width: 250px;
+}
+
+.sidebarClosed
+{
+    column-width: 0px;
+}
+
+.cellBlock
+{
+    height: 100%;
+    overflow-x: hidden;
+    border: 1px solid rgb(255, 255, 255);
+}
+
+.sidebar
+{
+    white-space: nowrap;
+    background: #4CAF50;
+    z-index: 200;
+    height: 300px;
+    min-width: 250px;
+    max-width: 250px;
+    /*border: 1px solid rgb(255, 0, 0);*/
+    transition: column-width 0.3s ease-out;
+    overflow-x: inherit;
+}
+
+.sidebar > *
+{
+    min-width: 240px;
+    max-width: 240px;
+    /*border: 1px solid rgb(0, 4, 255);*/
+    overflow-x: inherit;
+}
+
+.pageContentsCell
+{
+    display: table-cell;
+    position: static;
+}
+
+.pageContents
+{
+    position: relative;
+    z-index: 1;
+}
+
+.navbar
+{
+    overflow: hidden;
+    background: #4CAF50;
+    z-index: 1000;
+    width: 100%;
+}
+
+.navbarSticked
+{
+    z-index: 1000;
+    top: 0;
+}
+
+.navbar img
+{
+    float: left;
+    padding: 0;
+    margin: 0;
+}
+
+.navbar a 
+{
+    float: left;
+    display: block;
+    color: #000000;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.navbar a:hover 
+{
+    background-color: rgb(216, 241, 214);
+    color: black;
+}
+
+.navbar a.active 
+{
+    background-color: #4CAF50;
+    color: white;
+}
+
+.sticky
+{
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.hidden
+{
+    visibility: hidden;
+}
+
+.gooseClip
+{
+    -webkit-user-drag: none;
+    user-select: none;
+    z-index: 100;
+}
+
+.assaultGoose
+{
+    z-index: inherit;
+    border: 5px solid rgb(190, 172, 3);
+}
+
+.gooseKatysha
+{
+    margin-left: 20px; /* Отступы вокруг элемента */
+    border: 5px solid rgb(0, 0, 0);
+    z-index: inherit;
+}
+
+.bb
+{
+    -webkit-user-drag: none;
+    user-select: none;
+    z-index: 100;
+}
+
+.gooseFiresAGun
+{
+    z-index: inherit;
+}
+
+.muzzleFlash
+{
+    user-select: none;
+    z-index: 100;
+}
