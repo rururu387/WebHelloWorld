@@ -3,7 +3,7 @@ let sideBar;
 function init()
 {
     sideBar = new SideBar(document.getElementById("sidebar"), SidebarStates.Closed);
-    document.getElementById("sidebarCell").classList.add("sidebarClosed");
+    document.getElementById("sidebar").classList.add("sidebarClosed");
 
     repeatableAnim();
 }
@@ -219,27 +219,26 @@ function onScroll()
     console.log(window.pageYOffset + "\t" + sticky + "\t" + sideBar.getSideBar().style.marginTop)
     let navbar = document.getElementById("navbar");
     let sidebar = document.getElementById("sidebar");
-    let sidebarCell = document.getElementById("sidebarCell");
-    let cellBlock = document.getElementById("cellBlock");
+    let flexBlock = document.getElementById("flexBlock");
 
     if (window.pageYOffset >= sticky && !navbar.classList.contains("sticky")) 
     {
         navbar.classList.add("sticky");
-        cellBlock.style.marginTop = 0 + "px";
-        if (sidebarCell.classList.contains("sidebarOpened"))
+        flexBlock.style.marginTop = 0 + "px";
+        if (sidebar.classList.contains("sidebarOpened"))
         {
-            //cellBlock.style.position = "sticky";
-            cellBlock.classList.add("sticky");
+            //flexBlock.style.position = "sticky";
+            flexBlock.classList.add("sticky");
         }
     }
     else if (window.pageYOffset < sticky && navbar.classList.contains("sticky"))
     {
         navbar.classList.remove("sticky");
-        cellBlock.style.marginTop = sticky + "px";
-        if (sidebarCell.classList.contains("sidebarOpened"))
+        flexBlock.style.marginTop = sticky + "px";
+        if (sidebar.classList.contains("sidebarOpened"))
         {
-            //cellBlock.style.position = "static";
-            cellBlock.classList.remove("sticky");
+            //flexBlock.style.position = "static";
+            flexBlock.classList.remove("sticky");
         }
     }
 }
@@ -263,31 +262,30 @@ class SideBar
     expand()
     {
         let pageContentsCell = document.getElementById("pageContentsCell");
-        let sidebarCell = document.getElementById("sidebarCell");
-        let cellBlock = document.getElementById("cellBlock");
+        let flexBlock = document.getElementById("flexBlock");
         
         if (window.pageYOffset < sticky)
         {
-            cellBlock.style.marginTop = sticky + "px";
+            flexBlock.style.marginTop = sticky + "px";
         }
         else
         {
-            cellBlock.classList.add("sticky");
+            flexBlock.classList.add("sticky");
         }
 
-        sidebarCell.classList.remove("sidebarClosed");
-        sidebarCell.classList.add("sidebarOpened");
+        sidebar.classList.remove("sidebarClosed");
+        sidebar.classList.add("sidebarOpened");
         this.state = SidebarStates.Opened;
     }
 
     collapse()
     {
         let pageContentsCell = document.getElementById("pageContentsCell");
-        let sidebarCell = document.getElementById("sidebarCell");
-        let cellBlock = document.getElementById("cellBlock");
-        cellBlock.classList.remove("sticky");
-        sidebarCell.classList.remove("sidebarOpened");
-        sidebarCell.classList.add("sidebarClosed");
+        let sidebar = document.getElementById("sidebar");
+        let flexBlock = document.getElementById("flexBlock");
+        /*setTimeout(()=>{flexBlock.classList.remove("sticky");}, 300);*/
+        sidebar.classList.remove("sidebarOpened");
+        sidebar.classList.add("sidebarClosed");
         this.state = SidebarStates.Closed;
     }
 
