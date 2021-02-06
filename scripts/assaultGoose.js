@@ -216,7 +216,6 @@ let wasSideBarScrollable = true;
 
 function onScroll()
 {
-    console.log(window.pageYOffset + "\t" + sticky + "\t" + sideBar.getSideBar().style.marginTop)
     let navbar = document.getElementById("navbar");
     let sidebar = document.getElementById("sidebar");
     let flexBlock = document.getElementById("flexBlock");
@@ -224,21 +223,20 @@ function onScroll()
     if (window.pageYOffset >= sticky && !navbar.classList.contains("sticky")) 
     {
         navbar.classList.add("sticky");
-        flexBlock.style.marginTop = 0 + "px";
         if (sidebar.classList.contains("sidebarOpened"))
         {
-            //flexBlock.style.position = "sticky";
             flexBlock.classList.add("sticky");
+            flexBlock.style.marginTop = 0 + "px";
         }
     }
     else if (window.pageYOffset < sticky && navbar.classList.contains("sticky"))
     {
         navbar.classList.remove("sticky");
-        flexBlock.style.marginTop = sticky + "px";
         if (sidebar.classList.contains("sidebarOpened"))
         {
-            //flexBlock.style.position = "static";
             flexBlock.classList.remove("sticky");
+            let marginTop = (flexBlock.style.marginTop === '') ? 0 : parseInt(flexBlock.style.marginTop, 10);
+            flexBlock.style.marginTop = navbar.offsetTop - this.sidebar.offsetTop + marginTop + "px";
         }
     }
 }
@@ -261,15 +259,22 @@ class SideBar
 
     expand()
     {
-        let pageContentsCell = document.getElementById("pageContentsCell");
         let flexBlock = document.getElementById("flexBlock");
-        
+        let navbar = document.getElementById("navbar");
+
         if (window.pageYOffset < sticky)
         {
-            flexBlock.style.marginTop = sticky + "px";
+            //DEBUG
+            if (navbar.offsetTop - this.sidebar.offsetTop < 0)
+            {
+                alert("Sidebar coords are wrong!");
+            }
+            let marginTop = (flexBlock.style.marginTop === '') ? 0 : parseInt(flexBlock.style.marginTop, 10);
+            flexBlock.style.marginTop = navbar.offsetTop - this.sidebar.offsetTop + marginTop + "px";
         }
         else
         {
+            flexBlock.style.marginTop = 0 + "px";
             flexBlock.classList.add("sticky");
         }
 
@@ -280,10 +285,7 @@ class SideBar
 
     collapse()
     {
-        let pageContentsCell = document.getElementById("pageContentsCell");
         let sidebar = document.getElementById("sidebar");
-        let flexBlock = document.getElementById("flexBlock");
-        /*setTimeout(()=>{flexBlock.classList.remove("sticky");}, 300);*/
         sidebar.classList.remove("sidebarOpened");
         sidebar.classList.add("sidebarClosed");
         this.state = SidebarStates.Closed;
@@ -316,7 +318,4 @@ window.onload = function() {init();};
 
 window.onscroll = function() {onScroll();};
 
-document.getElementById("smilingGoose").onclick = function()
-{
-    sideBar.toggleState();
-}
+document.getElementById("smilingGoose").onclick = function() {sideBar.toggleState();};
